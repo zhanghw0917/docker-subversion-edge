@@ -1,34 +1,34 @@
-# mamohr/subversion-edge
+# zhanghw0917/docker-subversion-edge
+
+fork from   mamohr/docker-subversion-edge https://github.com/mamohr/docker-subversion-edge
 
 This is a docker image of the Collabnet Subversion Edge Server
 
 ## Usage
 
-The image is exposing the data dir of csvn as a volume under `/opt/csvn/data`.
-If you provide an empty host folder as volume the init scripts will take care of copying a basic configuration to the volume.
-The container exposes the following ports:
+* pull image 
 
- * 3343 - HTTP CSVN Admin Sites
- * 4434 - HTTPS CSVN Admin Sites (If SSL is enabled)
- * 18080 - Apache Http SVN
-
-The simplest way to start a subversion edge server is
-
-    docker run -d mamohr/subversion-edge
-
-This will run the server. It will only be reachable from the docker host by using the container ip address
-
-Exposing the ports from the host:
+        docker push brotherdavid/csvn:0.1
     
-    docker run -d -p 3343:3343 -p 4434:4434 -p 18080:18080 \
-        --name svn-server mamohr/subversion-edge
+* 创建宿主机 工作目录
+   
+        mkdir -p /mtdata/csvn_repo
+        chown 777 -R csvn_repo
+   
+ * 运行
+ 
+    docker run -d -p 3343:3343 -p 4434:4434 -p 18080:18080 -v /mtdata/csvn_repo:/opt/csvn/data --name csvn-server brotherdavid/csvn:0.1
+ 
+* 说明
 
-This will make the admin interface reachable under [http://docker-host:3343/csvn](http://docker-host:3343/csvn).
+ > * 3343 - HTTP CSVN Admin Sites
+ > * 4434 - HTTPS CSVN Admin Sites (If SSL is enabled)
+ > * 18080 - Apache Http SVN
 
-If you want to provide a host path for the data use command like this:
+* 使用 
 
-    docker run -d -p 3343:3343 -p 4434:4434 -p 18080:18080 \
-        -v /srv/svn-data:/opt/csvn/data --name svn-server mamohr/subversion-edge
-    
+    访问 http://docker-host:3343/csvn 进入web管理页面
+    svn 资源库访问地址  http://docker-host:18080
 
-For information to further configuration please consult the documentation at [CollabNet](http://collab.net/products/subversion).
+更多信息访问
+[CollabNet](http://collab.net/products/subversion).
