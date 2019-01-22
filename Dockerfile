@@ -9,7 +9,7 @@ RUN \
   yum clean all && \
   easy_install supervisor
 
-ENV FILE https://downloads-guests.open.collab.net/files/documents/61/17071/CollabNetSubversionEdge-5.2.0_linux-x86_64.tar.gz
+ENV FILE http://static.matu.im/app/CollabNetSubversionEdge-5.2.3_linux-x86_64.tar
 
 RUN wget -q ${FILE} -O /tmp/csvn.tgz && \
     mkdir -p /opt/csvn && \
