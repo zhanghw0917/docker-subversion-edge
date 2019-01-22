@@ -8,7 +8,7 @@ This is a docker image of the Collabnet Subversion Edge Server
 
 * pull image 
 
-        docker push brotherdavid/csvn:0.1
+        docker pull brotherdavid/csvn:0.1
     
 * 创建宿主机 工作目录
    
